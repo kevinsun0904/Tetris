@@ -1,4 +1,4 @@
 # Tetris
 
-## July 23, 2023
-## Project begins.
+### July 23, 2023
+Project begins.
