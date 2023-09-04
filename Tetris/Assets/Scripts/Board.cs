@@ -50,7 +50,7 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public bool IsValidPosition(Piece piece, Vector3Int position) {
+    public bool IsValidPosition(Piece piece, Vector3Int position) { //check if each of the tiles are valid
         RectInt bounds = this.Bounds;
 
         for (int i = 0; i < piece.cells.Length; i++) {

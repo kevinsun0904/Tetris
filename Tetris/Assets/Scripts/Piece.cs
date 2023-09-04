@@ -47,7 +47,7 @@ public class Piece : MonoBehaviour {
             HardDrop();
         }
 
-        this.board.Set(this);
+        this.board.Set(this); //set all tiles after changes
     }
 
     private void HardDrop() {
@@ -64,25 +64,36 @@ public class Piece : MonoBehaviour {
         bool valid = this.board.IsValidPosition(this, newPosition);
 
         if (valid) {
-            this.position = newPosition;
+            this.position = newPosition; //set center position
         }
 
         return valid;
     }
 
     private void Rotate(int direction) {
+        int originalRotation = this.rotationIndex;
         this.rotationIndex = Wrap(this.rotationIndex + direction, 0, 4); 
 
+        ApplyRotationMatrix(direction);
+
+        if (!TestWallKicks(this.rotationIndex, direction)) {
+            this.rotationIndex = originalRotation;
+            ApplyRotationMatrix(-direction);
+        }
+    }
+
+    private void ApplyRotationMatrix(int direction) {
         for (int i = 0; i < this.cells.Length; i++) {
             Vector3 cell = this.cells[i];
 
             int x, y;
 
-            switch (this.data.tetromino) {
+            switch (this.data.tetromino) { //depending on the case apply rotation matrix to each tile
                 case Tetromino.I:
                 case Tetromino.O:
                     cell.x -= 0.5f;
                     cell.y -= 0.5f;
+                    //matrix multiplication
                     x = Mathf.CeilToInt((cell.x * Data.RotationMatrix[0] * direction) + (cell.y * Data.RotationMatrix[1] * direction));
                     y = Mathf.CeilToInt((cell.x * Data.RotationMatrix[2] * direction) + (cell.y * Data.RotationMatrix[3] * direction));
                     break;
@@ -94,6 +105,30 @@ public class Piece : MonoBehaviour {
 
             this.cells[i] = new Vector3Int(x, y, 0);
         }
+    }
+
+    private bool TestWallKicks(int rotationIndex, int rotationDirection) {
+        int wallKickIndex = GetWallKickIndex(rotationIndex, rotationDirection);
+
+        for (int i = 0; i < this.data.wallKicks.GetLength(1); i++) { //wallKicks is a 2d array. run through the horizontal cells for 5 tests
+            Vector2Int translation = this.data.wallKicks[wallKickIndex, i]; //
+
+            if (Move(translation)) { //move returns a bool of whether movement is successfull
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private int GetWallKickIndex(int rotationIndex, int rotationDirection) {
+        int wallKickIndex = rotationIndex * 2;
+
+        if (rotationDirection < 0) {
+            wallKickIndex--;
+        }
+
+        return Wrap(wallKickIndex, 0, this.data.wallKicks.GetLength(0)); //return wallKickIndex depending on change in state and direction
     }
 
     private int Wrap(int input, int min, int max) {
