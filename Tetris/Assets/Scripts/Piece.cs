@@ -39,6 +39,7 @@ public class Piece : MonoBehaviour {
             Move(Vector2Int.right);
         }
 
+        //soft drop action
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
             Move(Vector2Int.down);
         }
@@ -71,6 +72,7 @@ public class Piece : MonoBehaviour {
     }
 
     private void Rotate(int direction) {
+        //Each tile has four states of rotation. Direction of 1 indicates a clockwise rotation, direction of -1 indicates an anti-clockwise rotation.
         int originalRotation = this.rotationIndex;
         this.rotationIndex = Wrap(this.rotationIndex + direction, 0, 4); 
 
