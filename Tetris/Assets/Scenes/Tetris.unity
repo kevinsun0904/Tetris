@@ -743,6 +743,7 @@ MonoBehaviour:
   - tetromino: 6
     tile: {fileID: 11400000, guid: fbbe62be3490842e1b6d4fe222466ccc, type: 2}
   spawnPosition: {x: -1, y: 8, z: 0}
+  boardSize: {x: 10, y: 20}
 --- !u!114 &1866904098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,6 +756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee94536b841a5945b1307573de541c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepDelay: 1
+  lockDelay: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

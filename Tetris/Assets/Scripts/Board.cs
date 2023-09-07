@@ -33,7 +33,16 @@ public class Board : MonoBehaviour {
         TetrominoData data = this.tetrominos[random];
 
         this.activePiece.Initialize(this, this.spawnPosition, data);
-        Set(activePiece);
+
+        if (IsValidPosition(this.activePiece, this.spawnPosition)) { //gameover if piece spawn location is not valid
+            Set(this.activePiece);
+        } else {
+            GameOver();
+        }
+    }
+
+    private void GameOver() {
+        this.tilemap.ClearAllTiles();
     }
 
     public void Set(Piece piece) {
@@ -67,5 +76,52 @@ public class Board : MonoBehaviour {
         }
 
         return true;
+    }
+
+    public void ClearLines() {
+        RectInt bounds = this.Bounds;
+        int row = bounds.yMin;
+    
+        while (row < bounds.yMax) {
+            if (IsLineFull(row)) {
+                LineClear(row);
+            }
+            else { //only increment row if line is not full, since the line will fall when it is full and the same row needs to be tested again
+                row++;
+            }
+        }
+    }
+
+    private bool IsLineFull(int row) {
+        RectInt bounds = this.Bounds;
+
+        for (int col = bounds.xMin; col < bounds.xMax; col++){
+            Vector3Int position = new Vector3Int(col, row, 0);
+
+            if (!this.tilemap.HasTile(position)) { //check if position contains tile
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void LineClear(int row) {
+        RectInt bounds = this.Bounds;
+        for (int col = bounds.xMin; col < bounds.xMax; col++){
+            Vector3Int position = new Vector3Int(col, row, 0);
+            this.tilemap.SetTile(position, null);
+        }
+
+        while (row < bounds.yMax) {
+            for (int col = bounds.yMin; col < bounds.yMax; col++) {
+                Vector3Int position = new Vector3Int(col, row + 1, 0);
+                TileBase above = this.tilemap.GetTile(position);
+
+                position = new Vector3Int(col, row, 0);
+                this.tilemap.SetTile(position, above);
+            }
+
+            row++;
+        }
     }
 }

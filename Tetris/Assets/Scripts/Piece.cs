@@ -35,7 +35,7 @@ public class Piece : MonoBehaviour {
     private void Update() {
         this.board.Clear(this);
 
-        this.lockTime += Time.deltaTime;
+        this.lockTime += Time.deltaTime; //deltatime is the time interval from the previous frame
 
         if (Input.GetKeyDown(KeyCode.Z)) {
             Rotate(-1);
@@ -77,6 +77,7 @@ public class Piece : MonoBehaviour {
 
     private void Lock() {
         this.board.Set(this);
+        this.board.ClearLines();
         this.board.SpawnPiece();
     }
 
