@@ -35,6 +35,8 @@ public class Piece : MonoBehaviour {
     private void Update() {
         this.board.Clear(this);
 
+        this.lockTime += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.Z)) {
             Rotate(-1);
         } else if (Input.GetKeyDown(KeyCode.X)) {
@@ -56,13 +58,34 @@ public class Piece : MonoBehaviour {
             HardDrop();
         }
 
+        if (Time.time >= this.stepTime) { //whenever a steptime is reached
+            Step();
+        }
+
         this.board.Set(this); //set all tiles after changes
+    }
+
+    private void Step() {
+        this.stepTime = Time.time + stepDelay; //push step time to the future by step delay whenever it is reached
+
+        Move(Vector2Int.down); //locktime wont reset when tetromino is at the bottom since move will fail
+
+        if (this.lockTime >= this.lockDelay) { //rotate and move resets locktime
+            Lock(); //a piece is locked whenever it isnt interacted with for lockDelay amount of time
+        }
+    }
+
+    private void Lock() {
+        this.board.Set(this);
+        this.board.SpawnPiece();
     }
 
     private void HardDrop() {
         while (Move(Vector2Int.down)) {
             continue;
         }
+
+        Lock();
     }
 
     private bool Move(Vector2Int translation) {
@@ -122,8 +145,8 @@ public class Piece : MonoBehaviour {
         int wallKickIndex = GetWallKickIndex(rotationIndex, rotationDirection);
 
         for (int i = 0; i < this.data.wallKicks.GetLength(1); i++) { //wallKicks is a 2d array. run through the horizontal cells for 5 tests
-            Vector2Int translation = this.data.wallKicks[wallKickIndex, i]; //
-
+            Vector2Int translation = this.data.wallKicks[wallKickIndex, i]; //wallkick array contains an offset and move tests whether the offset is possible
+            //true is returned on the first successful offset
             if (Move(translation)) { //move returns a bool of whether movement is successfull
                 return true;
             }
