@@ -98,7 +98,7 @@ public class Piece : MonoBehaviour {
 
         if (valid) {
             this.position = newPosition; //set center position
-            this.lockTime = 0f;
+            this.lockTime = 0f; //resets lock time
         }
 
         return valid;
@@ -118,6 +118,7 @@ public class Piece : MonoBehaviour {
     }
 
     private void ApplyRotationMatrix(int direction) {
+        //Calculates the new coordinates of the tile based on the given direction and rotation matrix to complete the rotation. 
         for (int i = 0; i < this.cells.Length; i++) {
             Vector3 cell = this.cells[i];
 
