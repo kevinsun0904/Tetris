@@ -9,11 +9,19 @@ public class Piece : MonoBehaviour {
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; }
 
+    public float stepDelay = 1f;
+    public float lockDelay = 0.5f;
+
+    private float stepTime;
+    private float lockTime;
+
     public void Initialize(Board board, Vector3Int position, TetrominoData data) {
         this.board = board;
         this.position = position;
         this.data = data;
         this.rotationIndex = 0;
+        this.stepTime = Time.time + this.stepDelay;
+        this.lockTime = 0f;
 
         if (this.cells == null) {
             this.cells = new Vector3Int[data.cells.Length];
@@ -66,6 +74,7 @@ public class Piece : MonoBehaviour {
 
         if (valid) {
             this.position = newPosition; //set center position
+            this.lockTime = 0f;
         }
 
         return valid;
