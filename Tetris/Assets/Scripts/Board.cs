@@ -7,8 +7,8 @@ public class Board : MonoBehaviour {
     public TetrominoData[] tetrominos;
     public Vector3Int spawnPosition; 
     public Vector2Int boardSize = new Vector2Int(10, 20);
-    public int level;
-    public int linesCleared;
+    public int level { get; private set; }
+    public int linesCleared { get; private set; }
 
     public RectInt Bounds {
         get {
