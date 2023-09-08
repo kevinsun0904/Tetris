@@ -7,6 +7,8 @@ public class Board : MonoBehaviour {
     public TetrominoData[] tetrominos;
     public Vector3Int spawnPosition; 
     public Vector2Int boardSize = new Vector2Int(10, 20);
+    public int level;
+    public int linesCleared;
 
     public RectInt Bounds {
         get {
@@ -22,6 +24,9 @@ public class Board : MonoBehaviour {
         for (int i = 0; i < this.tetrominos.Length; i++) {
             this.tetrominos[i].Initialize();
         }
+
+        this.level = 1;
+        this.linesCleared = 0;
     }
 
     private void Start() {
@@ -43,6 +48,8 @@ public class Board : MonoBehaviour {
 
     private void GameOver() {
         this.tilemap.ClearAllTiles();
+        this.level = 1;
+        this.linesCleared = 0;
     }
 
     public void Set(Piece piece) {
@@ -122,6 +129,11 @@ public class Board : MonoBehaviour {
             }
 
             row++;
+        }
+
+        this.linesCleared++; //record total lines cleared
+        if (this.linesCleared % 10 == 0) {
+            this.level++; //increase level every 10 lines cleared
         }
     }
 }

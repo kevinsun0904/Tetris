@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,8 +10,8 @@ public class Piece : MonoBehaviour {
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; }
 
-    public float stepDelay = 1f;
-    public float lockDelay = 0.5f;
+    public float stepDelay;
+    public float lockDelay = 0.3f;
 
     private float stepTime;
     private float lockTime;
@@ -20,6 +21,7 @@ public class Piece : MonoBehaviour {
         this.position = position;
         this.data = data;
         this.rotationIndex = 0;
+        this.stepDelay = (float) Math.Pow(0.95, this.board.level - 1);
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
 
