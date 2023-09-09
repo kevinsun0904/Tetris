@@ -1,5 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System;
 
 public class Board : MonoBehaviour {
     public Tilemap tilemap { get; private set; }
@@ -7,6 +12,7 @@ public class Board : MonoBehaviour {
     public TetrominoData[] tetrominos;
     public Vector3Int spawnPosition; 
     public Vector2Int boardSize = new Vector2Int(10, 20);
+    public Queue<TetrominoData> tetrominoQueue { get; private set; }
     public int level { get; private set; }
     public int linesCleared { get; private set; }
 
@@ -25,6 +31,8 @@ public class Board : MonoBehaviour {
             this.tetrominos[i].Initialize();
         }
 
+        tetrominoQueue = new Queue<TetrominoData>();
+
         this.level = 1;
         this.linesCleared = 0;
     }
@@ -34,10 +42,17 @@ public class Board : MonoBehaviour {
     }
 
     public void SpawnPiece() {
-        int random = Random.Range(0, this.tetrominos.Length);
+        /*
+        int random = UnityEngine.Random.Range(0, this.tetrominos.Length);
         TetrominoData data = this.tetrominos[random];
+        */
+        
+        if (tetrominoQueue.Count == 0) {
+            populateQueue();
+        }
+        
 
-        this.activePiece.Initialize(this, this.spawnPosition, data);
+        this.activePiece.Initialize(this, this.spawnPosition, tetrominoQueue.Dequeue());
 
         if (IsValidPosition(this.activePiece, this.spawnPosition)) { //gameover if piece spawn location is not valid
             Set(this.activePiece);
@@ -134,6 +149,21 @@ public class Board : MonoBehaviour {
         this.linesCleared++; //record total lines cleared
         if (this.linesCleared % 10 == 0) {
             this.level++; //increase level every 10 lines cleared
+        }
+    }
+
+    public void populateQueue() {
+        TetrominoData[] list = new TetrominoData[14];
+        for (int i = 0, j = 0; i < 7; i++, j++) {
+            list[j] = this.tetrominos[i];
+            list[++j] = this.tetrominos[i];
+        }
+
+        System.Random rnd = new System.Random();
+        rnd.Shuffle(list);
+
+        for (int i = 0; i < 14; i++) {
+            this.tetrominoQueue.Enqueue(list[i]);
         }
     }
 }
