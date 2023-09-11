@@ -21,7 +21,7 @@ public class Piece : MonoBehaviour {
         this.position = position;
         this.data = data;
         this.rotationIndex = 0;
-        this.stepDelay = (float) Math.Pow(0.95, this.board.level - 1);
+        this.stepDelay = (float) Math.Pow(0.8, this.board.level - 1);
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
 

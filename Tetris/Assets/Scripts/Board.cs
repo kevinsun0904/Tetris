@@ -15,6 +15,7 @@ public class Board : MonoBehaviour {
     public Queue<TetrominoData> tetrominoQueue { get; private set; }
     public int level { get; private set; }
     public int linesCleared { get; private set; }
+    public Next next;
 
     public RectInt Bounds {
         get {
@@ -35,6 +36,8 @@ public class Board : MonoBehaviour {
 
         this.level = 1;
         this.linesCleared = 0;
+
+        populateQueue();
     }
 
     private void Start() {
@@ -46,13 +49,14 @@ public class Board : MonoBehaviour {
         int random = UnityEngine.Random.Range(0, this.tetrominos.Length);
         TetrominoData data = this.tetrominos[random];
         */
-        
+
+        this.activePiece.Initialize(this, this.spawnPosition, tetrominoQueue.Dequeue());
+
         if (tetrominoQueue.Count == 0) {
             populateQueue();
         }
-        
 
-        this.activePiece.Initialize(this, this.spawnPosition, tetrominoQueue.Dequeue());
+        next.displayNext(tetrominoQueue.Peek());
 
         if (IsValidPosition(this.activePiece, this.spawnPosition)) { //gameover if piece spawn location is not valid
             Set(this.activePiece);
@@ -135,7 +139,7 @@ public class Board : MonoBehaviour {
         }
 
         while (row < bounds.yMax) {
-            for (int col = bounds.yMin; col < bounds.yMax; col++) {
+            for (int col = bounds.xMin; col < bounds.xMax; col++) {
                 Vector3Int position = new Vector3Int(col, row + 1, 0);
                 TileBase above = this.tilemap.GetTile(position);
 
