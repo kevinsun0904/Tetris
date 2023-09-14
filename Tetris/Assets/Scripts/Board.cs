@@ -37,7 +37,7 @@ public class Board : MonoBehaviour {
         this.level = 1;
         this.linesCleared = 0;
 
-        populateQueue();
+        PopulateQueue();
     }
 
     private void Start() {
@@ -53,7 +53,7 @@ public class Board : MonoBehaviour {
         this.activePiece.Initialize(this, this.spawnPosition, tetrominoQueue.Dequeue());
 
         if (tetrominoQueue.Count == 0) {
-            populateQueue();
+            PopulateQueue();
         }
 
         next.displayNext(tetrominoQueue.Peek());
@@ -156,7 +156,7 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public void populateQueue() {
+    public void PopulateQueue() {
         TetrominoData[] list = new TetrominoData[14];
         for (int i = 0, j = 0; i < 7; i++, j++) {
             list[j] = this.tetrominos[i];
@@ -169,5 +169,13 @@ public class Board : MonoBehaviour {
         for (int i = 0; i < 14; i++) {
             this.tetrominoQueue.Enqueue(list[i]);
         }
+    }
+
+    public void SetHold() {
+
+    }
+
+    public void SpawnHold() {
+        
     }
 }
