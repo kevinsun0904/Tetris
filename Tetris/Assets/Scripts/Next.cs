@@ -8,7 +8,6 @@ using Image = UnityEngine.UI.Image;
 
 public class Next : MonoBehaviour
 {
-    public Board board;
     public Image background;
     public Sprite tetrominoI;
     public Sprite tetrominoO;

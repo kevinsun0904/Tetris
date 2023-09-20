@@ -800,15 +800,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65d5e847d1db4a4ab9d24d916d7ac33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 0}
   background: {fileID: 1204122982}
   tetrominoI: {fileID: 21300000, guid: c80fc3109161e684b92ca080145cf5d1, type: 3}
-  tetrominoO: {fileID: 21300000, guid: 774fa586ba243f54f92bce708ecb917b, type: 3}
-  tetrominoZ: {fileID: 21300000, guid: 3e2fc5b3b3411a94d990b263cc821a0a, type: 3}
-  tetrominoS: {fileID: 21300000, guid: 35a3a47936e735945aca498f718eaef4, type: 3}
-  tetrominoL: {fileID: 21300000, guid: 51a1485338acae84585e3ea525804668, type: 3}
-  tetrominoJ: {fileID: 21300000, guid: b109e0a46ebdde140abbe8ffe76f424c, type: 3}
-  tetrominoT: {fileID: 21300000, guid: 019e0880cb7a5b04e9397e93cddcc382, type: 3}
+  tetrominoO: {fileID: 21300000, guid: d658048ca8e0e8946b0f481697d39f28, type: 3}
+  tetrominoZ: {fileID: 21300000, guid: 48ae7430f7a9d54449f40a424521f01b, type: 3}
+  tetrominoS: {fileID: 21300000, guid: 5c6cdebd46c6adc459b9e515e4e95cfb, type: 3}
+  tetrominoL: {fileID: 21300000, guid: 76889b696127eec439b3cfd8fd65360d, type: 3}
+  tetrominoJ: {fileID: 21300000, guid: cd120496463ceaf4387e5b13e74bbcc0, type: 3}
+  tetrominoT: {fileID: 21300000, guid: eac9fd146952d98498547f0daf886f39, type: 3}
 --- !u!114 &1204122982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,7 +828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: cf561441c119f2e4e8fbe7beac224e21, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
