@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
 public class Next : MonoBehaviour
 {
-    public Board board;
-    public Tile tile { get; private set; }
-    public Tilemap tilemap { get; private set; }
-    public Vector3Int[] cells { get; private set; }
-    public Vector3Int position;
-
-    private void Awake() {
-        this.tilemap = GetComponentInChildren<Tilemap>();
-        this.cells = new Vector3Int[4];
-    }
+    public Image background;
+    public Sprite tetrominoI;
+    public Sprite tetrominoO;
+    public Sprite tetrominoZ;
+    public Sprite tetrominoS;
+    public Sprite tetrominoL;
+    public Sprite tetrominoJ;
+    public Sprite tetrominoT;
 
     public void displayNext(TetrominoData data) {
         
+        /*
         Clear();
 
         for (int i = 0; i < data.cells.Length; i++) {
@@ -27,20 +28,30 @@ public class Next : MonoBehaviour
         this.tile = data.tile;
 
         Set(data);
-    }
+        */
 
-    private void Clear() {
-        //unsets the tile
-        for (int i = 0; i < this.cells.Length; i++) {
-            Vector3Int tilePosition = this.cells[i] + this.position;
-            this.tilemap.SetTile(tilePosition, null);
-        }
-    }
-
-    private void Set(TetrominoData data) {
-        for (int i = 0; i < this.cells.Length; i++) {
-            Vector3Int tilePosition = this.cells[i] + this.position;
-            this.tilemap.SetTile(tilePosition, this.tile);
+        switch(data.tetromino) {
+            case Tetromino.I:
+                background.sprite = tetrominoI;
+                break;
+            case Tetromino.O:
+                background.sprite = tetrominoO;
+                break;
+            case Tetromino.S:
+                background.sprite = tetrominoS;
+                break;
+            case Tetromino.Z:
+                background.sprite = tetrominoZ;
+                break;
+            case Tetromino.J:
+                background.sprite = tetrominoJ;
+                break;
+            case Tetromino.L:
+                background.sprite = tetrominoL;
+                break;
+            default:
+                background.sprite = tetrominoT;
+                break;
         }
     }
 }
