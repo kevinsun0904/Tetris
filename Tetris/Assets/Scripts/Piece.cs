@@ -60,6 +60,10 @@ public class Piece : MonoBehaviour {
             HardDrop();
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            this.board.Hold();
+        }
+
         if (Time.time >= this.stepTime) { //whenever a steptime is reached
             Step();
         }

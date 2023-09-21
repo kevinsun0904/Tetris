@@ -16,6 +16,7 @@ public class Board : MonoBehaviour {
     public int level { get; private set; }
     public int linesCleared { get; private set; }
     public Next next;
+    public Hold hold;
 
     public RectInt Bounds {
         get {
@@ -171,11 +172,28 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public void SetHold() {
+    public void Hold() {
+        TetrominoData previousHold = this.hold.currentHold;
+        bool hasTetromino = this.hold.HasTetromino();
+        this.hold.Set(this.activePiece.data);
 
+        Clear(this.activePiece);
+
+        SpawnHold(previousHold, hasTetromino);
     }
 
-    public void SpawnHold() {
-        
+    public void SpawnHold(TetrominoData data, bool hasTetromino) {
+        if (!hasTetromino) {
+            SpawnPiece();
+            return;
+        }
+
+        this.activePiece.Initialize(this, spawnPosition, data);
+
+        if (IsValidPosition(this.activePiece, this.spawnPosition)) { //gameover if piece spawn location is not valid
+            Set(this.activePiece);
+        } else {
+            GameOver();
+        }
     }
 }

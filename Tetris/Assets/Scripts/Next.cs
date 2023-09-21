@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
-using Image = UnityEngine.UI.Image;
 
 public class Next : MonoBehaviour
 {
