@@ -17,6 +17,8 @@ public class Board : MonoBehaviour {
     public int linesCleared { get; private set; }
     public Next next;
     public Hold hold;
+    [HideInInspector]
+    public AudioManager audioManager = AudioManager.instance;
 
     public RectInt Bounds {
         get {
@@ -42,7 +44,9 @@ public class Board : MonoBehaviour {
     }
 
     private void Start() {
+        audioManager = AudioManager.instance;
         SpawnPiece();
+        audioManager.PlayDelayed("Theme", .2f);
     }
 
     public void SpawnPiece() {

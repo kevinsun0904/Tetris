@@ -40,27 +40,34 @@ public class Piece : MonoBehaviour {
         this.lockTime += Time.deltaTime; //deltatime is the time interval from the previous frame
 
         if (Input.GetKeyDown(KeyCode.Z)) {
+            board.audioManager.Play("Rotate");
             Rotate(-1);
         } else if (Input.GetKeyDown(KeyCode.X)) {
+            board.audioManager.Play("Rotate");
             Rotate(1);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            board.audioManager.Play("Move");
             Move(Vector2Int.left);
         } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            board.audioManager.Play("Move");
             Move(Vector2Int.right);
         }
 
         //soft drop action
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            board.audioManager.Play("SoftDrop");
             Move(Vector2Int.down);
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
+            board.audioManager.Play("HardDrop");
             HardDrop();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            board.audioManager.Play("Hold");
             this.board.Hold();
         }
 
@@ -77,6 +84,7 @@ public class Piece : MonoBehaviour {
         Move(Vector2Int.down); //locktime wont reset when tetromino is at the bottom since move will fail
 
         if (this.lockTime >= this.lockDelay) { //rotate and move resets locktime
+            board.audioManager.Play("Landing");
             Lock(); //a piece is locked whenever it isnt interacted with for lockDelay amount of time
         }
     }
