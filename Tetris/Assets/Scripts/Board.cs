@@ -5,6 +5,7 @@ using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Board : MonoBehaviour {
     public Tilemap tilemap { get; private set; }
@@ -19,6 +20,8 @@ public class Board : MonoBehaviour {
     public Hold hold;
     [HideInInspector]
     public AudioManager audioManager = AudioManager.instance;
+    public bool pause { get; private set; }
+    public GameOver gameOverScreen;
 
     public RectInt Bounds {
         get {
@@ -39,6 +42,7 @@ public class Board : MonoBehaviour {
 
         this.level = 1;
         this.linesCleared = 0;
+        this.pause = false;
 
         PopulateQueue();
     }
@@ -46,7 +50,7 @@ public class Board : MonoBehaviour {
     private void Start() {
         audioManager = AudioManager.instance;
         SpawnPiece();
-        audioManager.PlayDelayed("Theme", .2f);
+        audioManager.PlayDelayed("Theme", .5f);
     }
 
     public void SpawnPiece() {
@@ -71,9 +75,10 @@ public class Board : MonoBehaviour {
     }
 
     private void GameOver() {
-        this.tilemap.ClearAllTiles();
-        this.level = 1;
-        this.linesCleared = 0;
+        audioManager.Stop("Theme");
+        audioManager.Play("GameOver");
+        pause = true;
+        gameOverScreen.SetUp();
     }
 
     public void Set(Piece piece) {
@@ -112,14 +117,29 @@ public class Board : MonoBehaviour {
     public void ClearLines() {
         RectInt bounds = this.Bounds;
         int row = bounds.yMin;
+        int linesCleared = 0;
     
         while (row < bounds.yMax) {
             if (IsLineFull(row)) {
                 LineClear(row);
+                linesCleared++;
             }
             else { //only increment row if line is not full, since the line will fall when it is full and the same row needs to be tested again
                 row++;
             }
+        }
+
+        switch (linesCleared) {
+            case 1:
+            case 2:
+                audioManager.Play("Single");
+                break;
+            case 3:
+                audioManager.Play("Triple");
+                break;
+            case 4:
+                audioManager.Play("Tetris");
+                break;
         }
     }
 

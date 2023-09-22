@@ -35,6 +35,8 @@ public class Piece : MonoBehaviour {
     }
 
     private void Update() {
+        if (board.pause == true) return;
+
         this.board.Clear(this);
 
         this.lockTime += Time.deltaTime; //deltatime is the time interval from the previous frame

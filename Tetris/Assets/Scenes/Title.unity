@@ -222,7 +222,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 43184015}
-        m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
+        m_TargetAssemblyTypeName: Title, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
@@ -576,7 +576,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945587306}
   m_CullTransparentMesh: 1
---- !u!1001 &1225214204
+--- !u!1001 &1246035743
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -630,23 +630,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
       propertyPath: sounds.Array.size
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
-      propertyPath: sounds.Array.data[8].clip
+      propertyPath: sounds.Array.data[11].clip
       value: 
       objectReference: {fileID: 8300000, guid: 8ba16bac23432e44780178c0d4167796, type: 3}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
-      propertyPath: sounds.Array.data[8].name
+      propertyPath: sounds.Array.data[11].name
       value: Ok
       objectReference: {fileID: 0}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
-      propertyPath: sounds.Array.data[8].pitch
+      propertyPath: sounds.Array.data[11].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
-      propertyPath: sounds.Array.data[8].volume
-      value: 0.3
+      propertyPath: sounds.Array.data[11].volume
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -886,4 +886,4 @@ SceneRoots:
   - {fileID: 1312883222}
   - {fileID: 863237751}
   - {fileID: 469577183}
-  - {fileID: 1225214204}
+  - {fileID: 1246035743}

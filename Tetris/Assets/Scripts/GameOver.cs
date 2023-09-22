@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGame : MonoBehaviour
+public class GameOver : MonoBehaviour
 {
-    public string tetris;
     [HideInInspector]
     public AudioManager audioManager;
 
@@ -15,6 +14,15 @@ public class StartGame : MonoBehaviour
 
     public void LoadLevel() {
         audioManager.Play("Ok");
-        SceneManager.LoadScene(tetris);
+        SceneManager.LoadScene("Tetris");
+    }
+
+    public void loadTitle() {
+        audioManager.Play("Ok");
+        SceneManager.LoadScene("Title");
+    }
+
+    public void SetUp() {
+        gameObject.SetActive(true);
     }
 }

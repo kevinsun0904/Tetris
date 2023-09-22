@@ -77,7 +77,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Single
     clip: {fileID: 8300000, guid: 9583fdbe3fcd82342b37f3f7f6b98aac, type: 3}
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -90,6 +90,24 @@ MonoBehaviour:
   - name: Landing
     clip: {fileID: 8300000, guid: 0d136e7cbf7ac104bb94271c51542f78, type: 3}
     volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Triple
+    clip: {fileID: 8300000, guid: 72c58367857ef1045b83748d3dc5bb3f, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Tetris
+    clip: {fileID: 8300000, guid: d9c6389c4cb40ed42b0d004770ecbf00, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 3316dc413e1c8de4c876631a495013c5, type: 3}
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
