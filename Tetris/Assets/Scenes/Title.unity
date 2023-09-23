@@ -175,7 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4acd37c4541114294bf726fb5fa2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tetris: Tetris
   audioManager: {fileID: 0}
 --- !u!114 &43184016
 MonoBehaviour:
@@ -630,7 +629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
       propertyPath: sounds.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
       propertyPath: sounds.Array.data[11].clip
@@ -641,11 +640,27 @@ PrefabInstance:
       value: Ok
       objectReference: {fileID: 0}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
+      propertyPath: sounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: eb02d5afdd1d4e14a8bae496c7057340, type: 3}
+    - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
+      propertyPath: sounds.Array.data[12].name
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
       propertyPath: sounds.Array.data[11].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
+      propertyPath: sounds.Array.data[12].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
       propertyPath: sounds.Array.data[11].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682830285307424990, guid: 49c341dcc26a30c4db92b78676674393, type: 3}
+      propertyPath: sounds.Array.data[12].volume
       value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []

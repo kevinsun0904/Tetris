@@ -20,8 +20,8 @@ public class Board : MonoBehaviour {
     public Hold hold;
     [HideInInspector]
     public AudioManager audioManager = AudioManager.instance;
-    public bool pause { get; private set; }
     public GameOver gameOverScreen;
+    public Pause pause;
 
     public RectInt Bounds {
         get {
@@ -42,7 +42,6 @@ public class Board : MonoBehaviour {
 
         this.level = 1;
         this.linesCleared = 0;
-        this.pause = false;
 
         PopulateQueue();
     }
@@ -77,7 +76,6 @@ public class Board : MonoBehaviour {
     private void GameOver() {
         audioManager.Stop("Theme");
         audioManager.Play("GameOver");
-        pause = true;
         gameOverScreen.SetUp();
     }
 

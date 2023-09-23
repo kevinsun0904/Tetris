@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour
 {
-    public string tetris;
     [HideInInspector]
     public AudioManager audioManager;
 
-    void Start() {
-        audioManager = AudioManager.instance;
+    void Awake() {
+        this.audioManager = AudioManager.instance;
     }
 
     public void LoadLevel() {
         audioManager.Play("Ok");
-        SceneManager.LoadScene(tetris);
+        SceneManager.LoadScene("Tetris");
     }
 }

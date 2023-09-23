@@ -24,6 +24,7 @@ public class Piece : MonoBehaviour {
         this.stepDelay = (float) Math.Pow(0.8, this.board.level - 1);
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
+        Time.timeScale = 1;
 
         if (this.cells == null) {
             this.cells = new Vector3Int[data.cells.Length];
@@ -35,8 +36,6 @@ public class Piece : MonoBehaviour {
     }
 
     private void Update() {
-        if (board.pause == true) return;
-
         this.board.Clear(this);
 
         this.lockTime += Time.deltaTime; //deltatime is the time interval from the previous frame
@@ -71,6 +70,10 @@ public class Piece : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             board.audioManager.Play("Hold");
             this.board.Hold();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            this.board.pause.PauseGame();
         }
 
         if (Time.time >= this.stepTime) { //whenever a steptime is reached
