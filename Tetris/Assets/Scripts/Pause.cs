@@ -7,6 +7,7 @@ public class Pause : MonoBehaviour
 {
     [HideInInspector]
     public AudioManager audioManager;
+    public Board board;
 
     void Awake() {
         this.audioManager = AudioManager.instance;
@@ -16,7 +17,7 @@ public class Pause : MonoBehaviour
         audioManager.Play("Ok");
         audioManager.UnPause("Theme");
         gameObject.SetActive(false);
-        Time.timeScale = 1;
+        this.board.paused = false;
     }
 
     public void LoadLevel() {
@@ -32,9 +33,9 @@ public class Pause : MonoBehaviour
     }
 
     public void PauseGame() {
+        this.board.paused = true;
         this.audioManager = AudioManager.instance;
         audioManager.Play("Pause");
-        Time.timeScale = 0;
         gameObject.SetActive(true);
         audioManager.Pause("Theme");
     }

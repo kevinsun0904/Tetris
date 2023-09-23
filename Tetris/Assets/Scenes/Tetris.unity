@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 0}
+  board: {fileID: 1866904097}
 --- !u!114 &22023089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2831,6 +2832,7 @@ MonoBehaviour:
   audioManager: {fileID: 0}
   gameOverScreen: {fileID: 22023088}
   pause: {fileID: 1919077553}
+  paused: 0
 --- !u!114 &1866904098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2937,6 +2939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 0}
+  board: {fileID: 1866904097}
 --- !u!1 &2026185724
 GameObject:
   m_ObjectHideFlags: 0

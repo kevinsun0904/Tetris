@@ -22,6 +22,8 @@ public class Board : MonoBehaviour {
     public AudioManager audioManager = AudioManager.instance;
     public GameOver gameOverScreen;
     public Pause pause;
+    [HideInInspector]
+    public bool paused;
 
     public RectInt Bounds {
         get {
@@ -42,6 +44,7 @@ public class Board : MonoBehaviour {
 
         this.level = 1;
         this.linesCleared = 0;
+        this.paused = false;
 
         PopulateQueue();
     }

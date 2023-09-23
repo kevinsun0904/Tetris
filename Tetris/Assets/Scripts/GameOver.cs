@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class GameOver : MonoBehaviour
 {
     [HideInInspector]
     public AudioManager audioManager;
+    public Board board;
 
     void Start() {
         this.audioManager = AudioManager.instance;
@@ -23,7 +25,7 @@ public class GameOver : MonoBehaviour
     }
 
     public void SetUp() {
-        Time.timeScale = 0;
+        this.board.paused = true;
         gameObject.SetActive(true);
     }
 }

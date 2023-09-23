@@ -11,7 +11,7 @@ public class Piece : MonoBehaviour {
     public int rotationIndex { get; private set; }
 
     public float stepDelay;
-    public float lockDelay = 0.3f;
+    public float lockDelay = 0.2f;
 
     private float stepTime;
     private float lockTime;
@@ -21,7 +21,7 @@ public class Piece : MonoBehaviour {
         this.position = position;
         this.data = data;
         this.rotationIndex = 0;
-        this.stepDelay = (float) Math.Pow(0.8, this.board.level - 1);
+        this.stepDelay = (float) Math.Pow(0.75, this.board.level - 1);
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
         Time.timeScale = 1;
@@ -36,6 +36,8 @@ public class Piece : MonoBehaviour {
     }
 
     private void Update() {
+        if (this.board.paused == true) return;
+
         this.board.Clear(this);
 
         this.lockTime += Time.deltaTime; //deltatime is the time interval from the previous frame
