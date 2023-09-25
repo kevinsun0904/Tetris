@@ -4,6 +4,9 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    /// <summary>
+    /// This class manages the audio played during the duration of the program.
+    /// </summary>
     public Sound[] sounds;
 
     public static AudioManager instance;
