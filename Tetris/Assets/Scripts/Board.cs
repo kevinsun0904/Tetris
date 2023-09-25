@@ -24,6 +24,7 @@ public class Board : MonoBehaviour {
     public Pause pause;
     [HideInInspector]
     public bool paused;
+    public Score score;
 
     public RectInt Bounds {
         get {
@@ -115,7 +116,7 @@ public class Board : MonoBehaviour {
         return true;
     }
 
-    public int ClearLines() {
+    public void ClearLines() {
         RectInt bounds = this.Bounds;
         int row = bounds.yMin;
         int linesCleared = 0;
@@ -142,7 +143,10 @@ public class Board : MonoBehaviour {
                 audioManager.Play("Tetris");
                 break;
         }
-        return linesCleared;
+        
+        if (linesCleared > 0){
+            score.CalculateScore(linesCleared, this.level);
+        }
     }
 
     private bool IsLineFull(int row) {
