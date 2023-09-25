@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,21 +9,25 @@ public class Score : MonoBehaviour
     public Board board;
     public Tile tile { get; private set; }
     public Tilemap tilemap { get; private set; }
-    public int CurrentScore;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        CurrentScore = 0;
-    }
+    public int currentScore = 0;
+    public TMP_Text scoreText;
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Awake(){
         
     }
-
-    public void CalculateScore(){
-
+    
+    public void CalculateScore(int LinesCleared, int Level)
+    {
+        if(LinesCleared == 1){
+            currentScore += Level * 40;
+        } else if (LinesCleared == 2){
+            currentScore += Level * 100;
+        } else if (LinesCleared == 3){
+            currentScore += Level * 300;
+        } else {
+            currentScore += Level * 1200;
+        }
+        scoreText.text = "Score: " + currentScore;
+        // this.scoreText.SetText("Score: " + currentScore);
     }
 }

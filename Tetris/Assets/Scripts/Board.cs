@@ -24,6 +24,7 @@ public class Board : MonoBehaviour {
     public Pause pause;
     [HideInInspector]
     public bool paused;
+    public Score score;
 
     public RectInt Bounds {
         get {
@@ -141,6 +142,10 @@ public class Board : MonoBehaviour {
             case 4:
                 audioManager.Play("Tetris");
                 break;
+        }
+        
+        if (linesCleared > 0){
+            score.CalculateScore(linesCleared, this.level);
         }
     }
 
