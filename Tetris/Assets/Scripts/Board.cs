@@ -115,7 +115,7 @@ public class Board : MonoBehaviour {
         return true;
     }
 
-    public void ClearLines() {
+    public int ClearLines() {
         RectInt bounds = this.Bounds;
         int row = bounds.yMin;
         int linesCleared = 0;
@@ -142,6 +142,7 @@ public class Board : MonoBehaviour {
                 audioManager.Play("Tetris");
                 break;
         }
+        return linesCleared;
     }
 
     private bool IsLineFull(int row) {
