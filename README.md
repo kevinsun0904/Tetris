@@ -1,4 +1,7 @@
 # Tetris
 
-### July 23, 2023
-Project begins.
+### Introduction
+Tetris program.
+
+###Credits
+Vivian Deng, Kevin Sun
