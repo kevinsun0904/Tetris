@@ -3,5 +3,5 @@
 ### Introduction
 Tetris program.
 
-###Credits
+### Credits
 Vivian Deng, Kevin Sun
