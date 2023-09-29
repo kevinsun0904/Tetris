@@ -16,7 +16,7 @@ public class Score : MonoBehaviour
         
     }
     
-    public void CalculateScore(int LinesCleared, int Level)
+    public void CalculateScore(int LinesCleared, int Level, bool hardDrop)
     {
         if(LinesCleared == 1){
             currentScore += Level * 40;

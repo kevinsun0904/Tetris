@@ -116,7 +116,7 @@ public class Board : MonoBehaviour {
         return true;
     }
 
-    public void ClearLines() {
+    public void ClearLines(bool hardDrop) {
         RectInt bounds = this.Bounds;
         int row = bounds.yMin;
         int linesCleared = 0;
@@ -145,7 +145,7 @@ public class Board : MonoBehaviour {
         }
         
         if (linesCleared > 0){
-            score.CalculateScore(linesCleared, this.level);
+            score.CalculateScore(linesCleared, this.level, hardDrop);
         }
     }
 

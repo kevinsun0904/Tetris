@@ -92,13 +92,13 @@ public class Piece : MonoBehaviour {
 
         if (this.lockTime >= this.lockDelay) { //rotate and move resets locktime
             board.audioManager.Play("Landing");
-            Lock(); //a piece is locked whenever it isnt interacted with for lockDelay amount of time
+            Lock(false); //a piece is locked whenever it isnt interacted with for lockDelay amount of time
         }
     }
 
-    private void Lock() {
+    private void Lock(bool hardDrop) {
         this.board.Set(this);
-        this.board.ClearLines();
+        this.board.ClearLines(hardDrop);
         this.board.SpawnPiece();
     }
 
@@ -107,7 +107,7 @@ public class Piece : MonoBehaviour {
             continue;
         }
 
-        Lock();
+        Lock(true);
     }
 
     private bool Move(Vector2Int translation) {
