@@ -26,6 +26,9 @@ public class Board : MonoBehaviour {
     public bool paused;
     public Score score;
 
+    /// <summary>
+    /// A RectInt used to store the bounds of the board
+    /// </summary>
     public RectInt Bounds {
         get {
             Vector2Int position = new Vector2Int(-this.boardSize.x / 2, -this.boardSize.y / 2);
@@ -33,6 +36,10 @@ public class Board : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Runs before Start()
+    /// Initializes all the tetrominos with the original cells and populates the queue of the next pieces
+    /// </summary>
     private void Awake() {
         this.tilemap = GetComponentInChildren<Tilemap>();
         this.activePiece = GetComponentInChildren<Piece>();
@@ -50,12 +57,22 @@ public class Board : MonoBehaviour {
         PopulateQueue();
     }
 
+    /// <summary>
+    /// Initializes audioManager
+    /// Plays theme song
+    /// starts the game by spawning the piece
+    /// </summary>
     private void Start() {
         audioManager = AudioManager.instance;
         SpawnPiece();
         audioManager.PlayDelayed("Theme", .5f);
     }
 
+    /// <summary>
+    /// Initializes the piece
+    /// Check if theres anything in the queue
+    /// Check if the spawn position is taken, if it then game over
+    /// </summary>
     public void SpawnPiece() {
         /*
         int random = UnityEngine.Random.Range(0, this.tetrominos.Length);
@@ -77,12 +94,20 @@ public class Board : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Stop music and play sound effect
+    /// Display game over screen
+    /// </summary>
     private void GameOver() {
         audioManager.Stop("Theme");
         audioManager.Play("GameOver");
         gameOverScreen.SetUp();
     }
 
+    /// <summary>
+    /// Sets the cellsof the piece on the tilemap
+    /// </summary>
+    /// <param name="piece">the piece to set</param>
     public void Set(Piece piece) {
         for (int i = 0; i < piece.cells.Length; i++) {
             Vector3Int tilePosition = piece.cells[i] + piece.position;
@@ -90,6 +115,10 @@ public class Board : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Clears the peice from the board by setting tilemap to null
+    /// </summary>
+    /// <param name="piece">the piece to clear</param>
     public void Clear(Piece piece) {
         //unsets the tile
         for (int i = 0; i < piece.cells.Length; i++) {
@@ -98,6 +127,12 @@ public class Board : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Checks if a piece can be placed at a certain position by checking if the position is outside the bounds or contains a tile
+    /// </summary>
+    /// <param name="piece"></param>
+    /// <param name="position"></param>
+    /// <returns></returns>
     public bool IsValidPosition(Piece piece, Vector3Int position) { //check if each of the tiles are valid
         RectInt bounds = this.Bounds;
 
@@ -116,6 +151,13 @@ public class Board : MonoBehaviour {
         return true;
     }
 
+    /// <summary>
+    /// Check all of the lines and clear the line if the line is full
+    /// Calculate the number of lines cleared in one movement
+    /// Play audio
+    /// Call CalculateScore()
+    /// </summary>
+    /// <param name="hardDrop">whether the drop is a hard drop</param>
     public void ClearLines(bool hardDrop) {
         RectInt bounds = this.Bounds;
         int row = bounds.yMin;
@@ -149,6 +191,11 @@ public class Board : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Checks if the lis full by checking if there is an empty tile in each row
+    /// </summary>
+    /// <param name="row">the row that is being checked</param>
+    /// <returns></returns>
     private bool IsLineFull(int row) {
         RectInt bounds = this.Bounds;
 
@@ -162,6 +209,12 @@ public class Board : MonoBehaviour {
         return true;
     }
 
+    /// <summary>
+    /// Clear all of the tiles in the row to clear
+    /// Move all of the lines above down by one line
+    /// Record total lines cleared and calculate level accordingly
+    /// </summary>
+    /// <param name="row">The row to clear</param>
     public void LineClear(int row) {
         RectInt bounds = this.Bounds;
         for (int col = bounds.xMin; col < bounds.xMax; col++){
@@ -182,11 +235,21 @@ public class Board : MonoBehaviour {
         }
 
         this.linesCleared++; //record total lines cleared
+        CalculateLevel();
+    }
+
+    /// <summary>
+    /// Calculates the level by checking whenever lines cleared reaches a multiple of 10
+    /// </summary>
+    public void CalculateLevel() {
         if (this.linesCleared % 10 == 0) {
             this.level++; //increase level every 10 lines cleared
         }
     }
 
+    /// <summary>
+    /// Populates the queue of tetrominos by adding tetrominos to an array list, shuffling the array, and then adding to the queue
+    /// </summary>
     public void PopulateQueue() {
         TetrominoData[] list = new TetrominoData[14];
         for (int i = 0, j = 0; i < 7; i++, j++) {
@@ -202,6 +265,10 @@ public class Board : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Adds the current tetromino to the hold and clears this piece on the screen
+    /// Spawns the previous tetromino held
+    /// </summary>
     public void Hold() {
         TetrominoData previousHold = this.hold.currentHold;
         bool hasTetromino = this.hold.HasTetromino();
@@ -212,6 +279,12 @@ public class Board : MonoBehaviour {
         SpawnHold(previousHold, hasTetromino);
     }
 
+    /// <summary>
+    /// Checks if there is a previous hold, if there isnt spawn new piece
+    /// Spawn the previous hold and check if it is game over
+    /// </summary>
+    /// <param name="data">The data for the previous hold</param>
+    /// <param name="hasTetromino">Whether there is a previous hold</param>
     public void SpawnHold(TetrominoData data, bool hasTetromino) {
         if (!hasTetromino) {
             SpawnPiece();
