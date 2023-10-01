@@ -9,6 +9,7 @@ public class Score : MonoBehaviour
     public Board board;
     public Tile tile { get; private set; }
     public Tilemap tilemap { get; private set; }
+    [HideInInspector]
     public int currentScore = 0;
     public TMP_Text scoreText;
 

@@ -11,7 +11,10 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Initializes all the AudioClips into AudioSources
+    /// Check if there is an audio manager from previous scenes and destroy this if there is
+    /// </summary>
     void Awake() {
         
         if (instance == null) {
@@ -38,6 +41,10 @@ public class AudioManager : MonoBehaviour
         //sound effect to play at the start
     }
 
+    /// <summary>
+    /// Plays an audio clip
+    /// </summary>
+    /// <param name="name">name of the audio clip</param>
     public void Play (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name); //find sound if sound.name == name
 
@@ -49,6 +56,11 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    /// <summary>
+    /// Play an audio clip with delay
+    /// </summary>
+    /// <param name="name">name of audio clip</param>
+    /// <param name="delayTime">time to delay</param>
     public void PlayDelayed (string name, float delayTime) {
         Sound s = Array.Find(sounds, sound => sound.name == name); //find sound if sound.name == name
 
@@ -60,6 +72,10 @@ public class AudioManager : MonoBehaviour
         s.source.PlayDelayed(delayTime);
     }
 
+    /// <summary>
+    /// Pause an audio clip
+    /// </summary>
+    /// <param name="name">Name of audio clip</param>
     public void Pause (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name); //find sound if sound.name == name
 
@@ -71,6 +87,10 @@ public class AudioManager : MonoBehaviour
         s.source.Pause();
     }
 
+    /// <summary>
+    /// Unpause an audio clip
+    /// </summary>
+    /// <param name="name">Name of audio clip</param>
     public void UnPause (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name); //find sound if sound.name == name
 
@@ -82,6 +102,10 @@ public class AudioManager : MonoBehaviour
         s.source.UnPause();
     }
 
+    /// <summary>
+    /// Stop an audio clip
+    /// </summary>
+    /// <param name="name">Name of audio clip</param>
     public void Stop (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name); //find sound if sound.name == name
 

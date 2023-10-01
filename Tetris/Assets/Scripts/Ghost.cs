@@ -12,11 +12,21 @@ public class Ghost : MonoBehaviour
     public Vector3Int[] cells { get; private set; }
     public Vector3Int position { get; private set; }
 
+    /// <summary>
+    /// Sets up the tilemap and creates the cells array
+    /// </summary>
     private void Awake() {
         this.tilemap = GetComponentInChildren<Tilemap>();
         this.cells = new Vector3Int[4];
     }
 
+    /// <summary>
+    /// Runs after the Update() method
+    /// Clears the previous ghost piece
+    /// Copies the cells from the active piece in board
+    /// Drops it to the bottom of the board
+    /// Sets the piece on the tilemap
+    /// </summary>
     private void LateUpdate() {
         Clear();
         Copy();
@@ -24,6 +34,9 @@ public class Ghost : MonoBehaviour
         Set();
     }
 
+    /// <summary>
+    /// Clears the ghost piece by setting the tiles to null
+    /// </summary>
     private void Clear() {
         //unsets the tile
         for (int i = 0; i < this.cells.Length; i++) {
@@ -32,12 +45,18 @@ public class Ghost : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Copies the cells of the active piece in board
+    /// </summary>
     private void Copy() {
         for (int i = 0; i < this.cells.Length; i++) {
             this.cells[i] = this.trackingPiece.cells[i];
         }
     }
 
+    /// <summary>
+    /// Drops the piece to the bottom to display the ghost piece
+    /// </summary>
     private void Drop() {
         Vector3Int position = this.trackingPiece.position;
 
@@ -60,6 +79,9 @@ public class Ghost : MonoBehaviour
         this.board.Set(this.trackingPiece);
     }
 
+    /// <summary>
+    /// Set the piece on the tilemap for ghost piece
+    /// </summary>
     private void Set() {
         for (int i = 0; i < this.cells.Length; i++) {
             Vector3Int tilePosition = this.cells[i] + this.position;
