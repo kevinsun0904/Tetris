@@ -18,7 +18,8 @@ public class Score : MonoBehaviour
     
     public void CalculateScore(int LinesCleared, int Level, bool hardDrop)
     {
-        if(LinesCleared == 1){
+        //TODO: Add softdrop and combo features in Board
+        if (LinesCleared == 1){
             currentScore += Level * 40;
         } else if (LinesCleared == 2){
             currentScore += Level * 100;
@@ -27,6 +28,12 @@ public class Score : MonoBehaviour
         } else {
             currentScore += Level * 1200;
         }
+        
+        if (hardDrop){
+            // Harddrop: 2 points per cell (all tetraminos have 4 cells)
+            currentScore += 8;
+        }
+        
         scoreText.text = "Score: " + currentScore;
         // this.scoreText.SetText("Score: " + currentScore);
     }
