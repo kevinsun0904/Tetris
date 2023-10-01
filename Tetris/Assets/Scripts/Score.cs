@@ -11,6 +11,7 @@ public class Score : MonoBehaviour
     public Tilemap tilemap { get; private set; }
     [HideInInspector]
     public int currentScore = 0;
+    public int comboCount { get; private set; }
     public TMP_Text scoreText;
 
     void Awake(){
@@ -37,5 +38,13 @@ public class Score : MonoBehaviour
         
         scoreText.text = "Score: " + currentScore;
         // this.scoreText.SetText("Score: " + currentScore);
+    }
+
+    public void IncrementCombo(int count) {
+        this.comboCount += count;
+    }
+
+    public void ResetCombo() {
+        this.comboCount = 0;
     }
 }

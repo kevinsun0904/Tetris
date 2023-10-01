@@ -54,6 +54,8 @@ public class Board : MonoBehaviour {
         this.linesCleared = 0;
         this.paused = false;
 
+        this.score.ResetCombo();
+
         PopulateQueue();
     }
 
@@ -187,7 +189,12 @@ public class Board : MonoBehaviour {
         }
         
         if (linesCleared > 0){
+            score.IncrementCombo(1);
+            
             score.CalculateScore(linesCleared, this.level, hardDrop);
+        }
+        else {
+            score.ResetCombo();
         }
     }
 
