@@ -16,6 +16,10 @@ public class Next : MonoBehaviour
     public Sprite tetrominoJ;
     public Sprite tetrominoT;
 
+    /// <summary>
+    /// Displays the next tetromino in the queue
+    /// </summary>
+    /// <param name="data">The next tetromino in queue</param>
     public void displayNext(TetrominoData data) {
         
         /*

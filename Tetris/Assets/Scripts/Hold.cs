@@ -16,14 +16,25 @@ public class Hold : MonoBehaviour
     public bool hasTetromino { get; private set; }
     public TetrominoData currentHold { get; private set; }
 
+    /// <summary>
+    /// Set hasTetromino to false at the start
+    /// </summary>
     public void Initialize() {
         this.hasTetromino = false;
     }
 
+    /// <summary>
+    /// Check if there is a tetromino in hold
+    /// </summary>
+    /// <returns>whether there is a tetromino in hold</returns>
     public bool HasTetromino() {
         return hasTetromino;
     }
 
+    /// <summary>
+    /// Set the new hold according to the tetromino provided and desplay the new picture
+    /// </summary>
+    /// <param name="data">Type of tetromino being held</param>
     public void Set(TetrominoData data) {
         this.currentHold = data;
         this.hasTetromino = true;

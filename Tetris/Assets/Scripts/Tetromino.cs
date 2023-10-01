@@ -18,6 +18,9 @@ public struct TetrominoData {
     public Vector2Int[] cells { get; private set; }
     public Vector2Int[,] wallKicks { get; private set; }
 
+    /// <summary>
+    /// Initializes the tetromino by copying the information for Data.cs
+    /// </summary>
     public void Initialize() {
         this.cells = Data.Cells[this.tetromino];
         this.wallKicks = Data.WallKicks[this.tetromino];
