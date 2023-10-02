@@ -20,21 +20,23 @@ public class Score : MonoBehaviour
     
     public void CalculateScore(int LinesCleared, int Level, bool hardDrop)
     {
-        //TODO: Add softdrop and combo features in Board
+        //TODO: Add softdrop features in Board
+        //TODO: Add T-spin in the future
         if (LinesCleared == 1){
-            currentScore += Level * 40;
+            currentScore += Level * (40 + comboCount * 50);
         } else if (LinesCleared == 2){
-            currentScore += Level * 100;
+            currentScore += Level * (100 + comboCount * 50);
         } else if (LinesCleared == 3){
-            currentScore += Level * 300;
+            currentScore += Level * (300 + comboCount * 50);
         } else {
-            currentScore += Level * 1200;
+            currentScore += Level * (1200 + comboCount * 50);
         }
         
         if (hardDrop){
             // Harddrop: 2 points per cell (all tetraminos have 4 cells)
             currentScore += 8;
         }
+
         
         scoreText.text = "Score: " + currentScore;
         // this.scoreText.SetText("Score: " + currentScore);
