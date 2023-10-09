@@ -10,13 +10,14 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public static AudioManager instance;
+    private float musicVolume;
+    private float sfxVolume;
 
     /// <summary>
     /// Initializes all the AudioClips into AudioSources
     /// Check if there is an audio manager from previous scenes and destroy this if there is
     /// </summary>
     void Awake() {
-        
         if (instance == null) {
             instance = this;
         } else {
@@ -34,6 +35,9 @@ public class AudioManager : MonoBehaviour
             sound.source.volume = sound.volume;
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
+
+            if (sound.name.Equals("Theme")) this.musicVolume = sound.volume;
+            else this.sfxVolume = sound.volume;
         }
     }
 
@@ -115,5 +119,39 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Stop();
+    }
+
+    public void SetMusic(float volume) {
+        if (volume > 1 || volume < 0) return;
+
+        this.musicVolume = volume;
+
+        foreach (Sound sound in this.sounds) {
+            if (sound.name.Equals("Theme")) {
+                sound.source.volume = volume;
+                sound.volume = volume;
+            }
+        }
+    }
+
+    public float GetMusic() {
+        return this.musicVolume;
+    }
+
+    public void SetSFX(float volume) {
+        if (volume > 1 || volume < 0) return;
+
+        this.sfxVolume = volume;
+
+        foreach (Sound sound in this.sounds) {
+            if (!sound.name.Equals("Theme")) {
+                sound.source.volume = volume;
+                sound.volume = volume;
+            }
+        }
+    }
+
+    public float GetSFX() {
+        return this.sfxVolume;
     }
 }

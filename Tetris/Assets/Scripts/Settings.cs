@@ -7,6 +7,7 @@ public class Settings : MonoBehaviour
     [HideInInspector]
     public AudioManager audioManager;
     public Pause pause;
+    public Audio audioControl;
 
     /// <summary>
     /// Initializes the audioManager
@@ -17,6 +18,7 @@ public class Settings : MonoBehaviour
 
     public void LoadAudio() {
         audioManager.Play("Ok");
+        audioControl.DisplayAudio();
     }
 
     public void LoadControls() {
