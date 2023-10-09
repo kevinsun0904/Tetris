@@ -8,6 +8,7 @@ public class Pause : MonoBehaviour
     [HideInInspector]
     public AudioManager audioManager;
     public Board board;
+    public Settings settings;
 
     /// <summary>
     /// Initialize the audioManager
@@ -55,5 +56,10 @@ public class Pause : MonoBehaviour
         audioManager.Play("Pause");
         gameObject.SetActive(true);
         audioManager.Pause("Theme");
+    }
+
+    public void LoadSettings() {
+        audioManager.Play("Ok");
+        settings.DisplaySettings();
     }
 }
